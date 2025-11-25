@@ -1,0 +1,422 @@
+/* Reinicio (reset) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Temas (oscuro / claro) */
+body.tema-oscuro {
+  --bg-main: #050505;
+  --bg-elevated: #0f0f10;
+  --bg-card: #111217;
+  --bg-header-gradient: linear-gradient(
+    135deg,
+    #020202 0%,
+    #111217 45%,
+    #00401e 100%
+  );
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #b5b5b5;
+  --acento: #00ff7f;
+  --acento-suave: rgba(0, 255, 127, 0.12);
+
+  --borde-suave: rgba(255, 255, 255, 0.08);
+  --sombra-suave: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+body.tema-claro {
+  --bg-main: #f4f5f7;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-header-gradient: linear-gradient(
+    135deg,
+    #e3f9e9 0%,
+    #ffffff 50%,
+    #e8f5ff 100%
+  );
+
+  --text-primary: #111217;
+  --text-secondary: #5c616a;
+  --acento: #009f4e;
+  --acento-suave: rgba(0, 159, 78, 0.12);
+
+  --borde-suave: rgba(0, 0, 0, 0.06);
+  --sombra-suave: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* Contenedor general */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* Encabezado */
+.billie-eilish-header {
+  position: relative;
+  background: var(--bg-header-gradient);
+  color: var(--text-primary);
+  box-shadow: var(--sombra-suave);
+}
+
+.billie-eilish-header-overlay {
+  backdrop-filter: blur(6px);
+}
+
+.billie-eilish-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 24px;
+}
+
+.billie-eilish-logo {
+  font-size: 2.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.billie-eilish-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+/* Boton switch de tema */
+.tema-switcher {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+body.tema-claro .tema-switcher {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.tema-switcher span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+.tema-btn {
+  border-radius: 999px;
+  padding: 6px 14px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  transition: all 0.18s ease-in-out;
+}
+
+.tema-btn:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.tema-claro .tema-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.tema-btn.active {
+  background-color: var(--acento);
+  color: #000;
+  border-color: var(--acento);
+}
+
+/* Filtros */
+.filters {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.filter-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--bg-elevated);
+  border-radius: 16px;
+  border: 1px solid var(--borde-suave);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+body.tema-claro .filter-form {
+  box-shadow: var(--sombra-suave);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--borde-suave);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.filter-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 1px var(--acento-suave);
+}
+
+/* Botones */
+.filter-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.btn-primary {
+  background-color: var(--acento);
+  color: #000;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.5);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--borde-suave);
+}
+
+.btn-secondary:hover {
+  background-color: var(--acento-suave);
+  color: var(--acento);
+}
+
+/* Titulos y textos */
+.section-title {
+  font-size: 1.4rem;
+  margin: 8px 0 4px;
+}
+
+.results-info {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Grilla de tarjetas  */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+/* Tarjeta */
+.billie-eilish-card {
+  background-color: var(--bg-card);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--borde-suave);
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.16s ease, box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.billie-eilish-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--acento);
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.55);
+}
+
+.billie-eilish-card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.billie-eilish-card-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  transform: scale(1.02);
+  transition: transform 0.7s ease;
+}
+
+.billie-eilish-card:hover .billie-eilish-card-image {
+  transform: scale(1.08);
+}
+
+.billie-eilish-card-body {
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.billie-eilish-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.billie-eilish-card-album {
+  font-size: 0.8rem;
+  color: var(--acento);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.billie-eilish-card-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: var(--acento-suave);
+  color: var(--acento);
+}
+
+.btn-delete {
+  background-color: rgba(220, 20, 60, 0.15);
+  color: #ff4b6e;
+}
+
+/* Paginacion */
+.paginacion {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-page {
+  padding: 6px 12px;
+}
+
+.page-info {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Estados */
+.empty-state,
+.error-state {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--bg-elevated);
+  border: 1px dashed var(--borde-suave);
+}
+
+/* Pie de pagina */
+.billie-eilish-footer {
+  margin-top: auto;
+  padding: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--borde-suave);
+  background-color: var(--bg-elevated);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .billie-eilish-header-content {
+    padding: 20px 14px 16px;
+  }
+
+  .billie-eilish-logo {
+    font-size: 1.6rem;
+  }
+
+  .filter-form {
+    padding: 12px;
+  }
+}
